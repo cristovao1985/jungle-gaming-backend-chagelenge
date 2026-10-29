@@ -1,0 +1,16 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jungle-gaming-api
+    env_file:
+      - .env.docker
+    environment:
+      DB_HOST: host.docker.internal
+      PORT: ${PORT:-3000}
+    ports:
+      - "${PORT:-3000}:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped

@@ -1,0 +1,42 @@
+{
+  "name": "junglegamingdesafiobackend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "typecheck": "bun check",
+    "debug": "bunx mikro-orm debug",
+    "start": "bun src/main.ts",
+    "start:dev": "bun --env-file=.env.local --watch src/main.ts",
+    "migration:create": "bun --env-file=.env.local ./node_modules/@mikro-orm/cli/cli.js migration:create",
+    "migration:dump": "bun --env-file=.env.local ./node_modules/@mikro-orm/cli/cli.js migration:create -- --dump",
+    "migration:up": "bun --env-file=.env.local ./node_modules/@mikro-orm/cli/cli.js migration:up",
+    "migration:down": "bun --env-file=.env.local ./node_modules/@mikro-orm/cli/cli.js migration:down",
+    "migration:check": "bun --env-file=.env.local ./node_modules/@mikro-orm/cli/cli.js migration:check",
+    "migration:pending": "bun --env-file=.env.local ./node_modules/@mikro-orm/cli/cli.js migration:pending",
+    "migration:list": "bun --env-file=.env.local ./node_modules/@mikro-orm/cli/cli.js migration:list",
+    "test:local": "bun --env-file=.env.local test"
+  },
+  "devDependencies": {
+    "@mikro-orm/cli": "^7.2.5",
+    "@mikro-orm/migrations": "^7.2.5",
+    "@types/bun": "latest",
+    "typescript": "5.9.3"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  },
+  "dependencies": {
+    "@mikro-orm/core": "^7.2.5",
+    "@mikro-orm/decorators": "^7.2.5",
+    "@mikro-orm/nestjs": "^7.1.0",
+    "@mikro-orm/postgresql": "^7.2.5",
+    "@nestjs/common": "^12.3.2",
+    "@nestjs/core": "^12.3.2",
+    "@nestjs/platform-express": "^12.3.2",
+    "decimal.js": "^10.6.0",
+    "pg": "^8.23.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  }
+}

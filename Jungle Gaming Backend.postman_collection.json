@@ -1,0 +1,395 @@
+{
+  "info": {
+    "_postman_id": "d3516c0b-6b3c-4db9-ab21-d1eb5130802b",
+    "name": "Jungle Gaming Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "6656595"
+  },
+  "item": [
+    {
+      "name": "Wallets",
+      "item": [
+        {
+          "name": "Busca transacoes por numero da carteira",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"playerId\":\"john Doe\",\r\n    \"currency\":\"BRL\",\r\n    \"initialBalance\":\"100\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wallets/wallet-id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wallets",
+                "wallet-id"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Busca carteira by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"playerId\":\"john Doe\",\r\n    \"currency\":\"BRL\",\r\n    \"initialBalance\":\"100\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wallets/wallet-id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wallets",
+                "wallet-id"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cria nova carteira",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"playerId\":\"john Doe\",\r\n    \"currency\":\"BRL\",\r\n    \"initialBalance\":\"100\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wallets",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wallets"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Wagering Transaction - Transacoes finaceiras",
+      "item": [
+        {
+          "name": "Cria transacao financeira REFUND",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "refund-key-001"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"providerId\": \"provider-test\",\r\n  \"playerId\": \"intrepidPirate\",\r\n  \"walletId\": \"wallet-id\",\r\n  \"externalTransactionId\": \"refund-001\",\r\n  \"type\": \"REFUND\",\r\n  \"amount\": \"10.00\",\r\n  \"currency\": \"BRL\",\r\n  \"roundId\": null,\r\n  \"referenceExternalTransactionId\": \"bet-001\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wagering/transactions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wagering",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cria transacao financeira ROLLBACK",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "rollback-key-001"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"providerId\": \"provider-test\",\r\n  \"playerId\": \"intrepidPirate\",\r\n  \"walletId\": \"wallet-id\",\r\n  \"externalTransactionId\": \"rollback-001\",\r\n  \"type\": \"ROLLBACK\",\r\n  \"amount\": \"10.00\",\r\n  \"currency\": \"BRL\",\r\n  \"roundId\": null,\r\n  \"referenceExternalTransactionId\": \"bet-001\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wagering/transactions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wagering",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cria transacao financeira BET",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"idempotencyKey\", \"bet-concurrent-key-A\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "bet-concurrent-key-A"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"providerId\": \"provider-test\",\r\n  \"playerId\": \"intrepidPirate\",\r\n  \"walletId\": \"wallet-id\",\r\n  \"externalTransactionId\": \"bet-concurrent-key-A\",\r\n  \"type\": \"BET\",\r\n  \"amount\": \"70\",\r\n  \"currency\": \"BRL\"  \r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wagering/transactions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wagering",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cria transacao financeira BET B",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"idempotencyKey\", \"bet-concurrent-key-B\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "bet-concurrent-key-B"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"providerId\": \"provider-test\",\r\n  \"playerId\": \"intrepidPirate\",\r\n  \"walletId\": \"wallet-id\",\r\n  \"externalTransactionId\": \"bet-concurrent-key-B\",\r\n  \"type\": \"BET\",\r\n  \"amount\": \"70.00\",\r\n  \"currency\": \"BRL\"  \r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wagering/transactions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wagering",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cria transacao financeira WIN",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "win-key-001"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"providerId\": \"provider-test\",\r\n  \"playerId\": \"intrepidPirate\",\r\n  \"walletId\": \"wallet-id\",\r\n  \"externalTransactionId\": \"win001\",\r\n  \"type\": \"WIN\",\r\n  \"amount\": \"10.00\",\r\n  \"currency\": \"BRL\",\r\n  \"roundId\": null,\r\n  \"referenceExternalTransactionId\": \"bet-test-001\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wagering/transactions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wagering",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Teste de concorrencia",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "\r\nconst url = 'http://localhost:3000/api/v1/wagering/transactions';\r\nconst walletId = 'wallet-id';\r\n\r\nfunction sendBet(item) {\r\n  return new Promise((resolve) => {\r\n    pm.sendRequest({\r\n      url,\r\n      method: 'POST',\r\n      header: {\r\n        'Content-Type': 'application/json',\r\n        'Idempotency-Key': item.key\r\n      },\r\n      body: {\r\n        mode: 'raw',\r\n        raw: JSON.stringify({\r\n          providerId: 'provider-test',\r\n          playerId: 'intrepidPirate',\r\n          walletId,\r\n          externalTransactionId: item.externalTransactionId,\r\n          type: 'BET',\r\n          amount: '70.00',\r\n          currency: 'BRL'\r\n        })\r\n      }\r\n    }, (error, response) => {\r\n      if (error) {\r\n        resolve({\r\n          request: item.externalTransactionId,\r\n          error: error.message\r\n        });\r\n        return;\r\n      }\r\n\r\n      let body;\r\n      try {\r\n        body = response.json();\r\n      } catch {\r\n        body = response.text();\r\n      }\r\n\r\n      resolve({\r\n        request: item.externalTransactionId,\r\n        httpStatus: response.code,\r\n        body\r\n      });\r\n    });\r\n  });\r\n}\r\n\r\nconst requests = [\r\n  {\r\n    key: 'bet-concurrent-key-A',\r\n    externalTransactionId: 'bet-concurrent-A'\r\n  },\r\n  {\r\n    key: 'bet-concurrent-key-B',\r\n    externalTransactionId: 'bet-concurrent-B'\r\n  }\r\n];\r\n\r\nconst results = await Promise.all(requests.map(sendBet));\r\n\r\nconsole.log('Resultados do teste paralelo:', results);\r\npm.environment.set('concurrencyResults', JSON.stringify(results));\r\n"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/wagering/transactions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "wagering",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "API health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Database health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/health/database",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "health",
+                "database"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
